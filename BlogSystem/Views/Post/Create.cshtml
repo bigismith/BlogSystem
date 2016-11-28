@@ -1,0 +1,18 @@
+﻿@model PostShortViewModel
+
+<h2>Create New Post</h2>
+
+@using (Html.BeginForm("Create", "Post", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(p => p.Title)
+        @Html.TextBoxFor(p => p.Title, new {@class = "form-control"})
+    </div>
+    <div>
+        @Html.LabelFor(p => p.Content)
+        @Html.TextBoxFor(p => p.Content, new {@class = "form-control"})
+    </div>
+
+    <input type="submit" />
+}
+

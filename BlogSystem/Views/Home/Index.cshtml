@@ -1,0 +1,13 @@
+﻿@model IEnumerable<PostShortViewModel>
+
+@foreach (var post in Model)
+{
+    <div class="jumbotron">
+        <h2 class="text-center"><a href="post/view/@post.Id">@post.Title</a></h2>
+        <p>
+            @post.Content
+        </p>
+        <div>Created at: @post.DateTime</div>
+        <div>by @post.Username</div>
+    </div>
+}

@@ -1,0 +1,52 @@
+﻿@model PostViewModel
+
+<h2>Post View</h2>
+
+<div class="jumbotron">
+    <h2 class="text-center">@Model.Title</h2>
+    <p>
+        @Model.Content
+    </p>
+    <div>Created at: @Model.DateTime</div>
+    <div>by @Model.Username</div>
+</div>
+
+<div class="jumbotron" id="comments_holder">
+    <h3>Comments:</h3>
+    @foreach (var comment in Model.Comments)
+    {
+        @Html.Action("Comment", "Post", comment)
+    }
+</div>
+
+<div class="jumbotron">
+    <h4>Post new comment:</h4>
+    
+    @*@using (Html.BeginForm("Comment", "Post", new { id = Model.Id }, FormMethod.Post))
+    {
+
+        <div>
+            @Html.LabelFor(p => p.Text)
+            @Html.TextBoxFor(p => p.Text, new { @class = "form-control" })
+        </div>
+
+        <input type="submit" />
+    }*@
+    
+    @using (Ajax.BeginForm("Comment", "Post", new { id = Model.Id }, new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.InsertAfter,
+        UpdateTargetId = "comments_holder"
+    }))
+    {
+
+        <div>
+            @Html.LabelFor(p => p.Text)
+            @Html.TextBoxFor(p => p.Text, new { @class = "form-control" })
+        </div>
+
+        <input type="submit" />
+    }
+
+    </div>
