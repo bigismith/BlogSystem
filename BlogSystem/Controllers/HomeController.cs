@@ -12,7 +12,8 @@ namespace BlogSystem.Controllers
     {
         public ActionResult Index()
         {
-            ICollection<PostShortViewModel> posts = this.Context.Posts.OrderByDescending(p => p.DateCreated).Select(p => new PostShortViewModel()
+            //ICollection<PostShortViewModel> posts = this.Context.Posts.OrderByDescending(p => p.DateCreated).Select(p => new PostShortViewModel()
+            ICollection<PostShortViewModel> posts = this.Data.Posts.All().OrderByDescending(p => p.DateCreated).Select(p => new PostShortViewModel()
             {
                 Id = p.Id,
                 Title = p.Title,

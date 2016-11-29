@@ -57,13 +57,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BlogSystemData.cs" />
     <Compile Include="BlogSystemDbContext.cs" />
+    <Compile Include="IBlogSystemData.cs" />
     <Compile Include="Migrations\201611231557540_addingComments.cs" />
     <Compile Include="Migrations\201611231557540_addingComments.Designer.cs">
       <DependentUpon>201611231557540_addingComments.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\SqlRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -80,6 +84,7 @@
       <DependentUpon>201611231557540_addingComments.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

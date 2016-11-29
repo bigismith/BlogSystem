@@ -13,7 +13,8 @@ namespace BlogSystem.Controllers
         // GET: Post
         public ActionResult View(int id)
         {
-            Post post = this.Context.Posts.Where(p => p.Id == id).FirstOrDefault();
+            //Post post = this.Context.Posts.Where(p => p.Id == id).FirstOrDefault();
+            Post post = this.Data.Posts.Find(id);
 
             PostViewModel postViewModel = null;
 
@@ -54,11 +55,12 @@ namespace BlogSystem.Controllers
                 Title = postShortViewModel.Title,
                 Content = postShortViewModel.Content,
                 DateCreated = DateTime.Now,
-                Author = this.Context.Users.FirstOrDefault( u => u.UserName == HttpContext.User.Identity.Name)
+                //Author = this.Context.Users.FirstOrDefault( u => u.UserName == HttpContext.User.Identity.Name)
+                Author = this.Data.Users.All().FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name)
             };
 
-            this.Context.Posts.Add(post);
-            this.Context.SaveChanges();
+            this.Data.Posts.Add(post);
+            this.Data.Posts.SaveChanges();
 
             return RedirectToAction("Index", "Home");
         }
@@ -79,7 +81,7 @@ namespace BlogSystem.Controllers
                 return null;
             }
 
-            Post post = this.Context.Posts.FirstOrDefault(p => p.Id == id);
+            Post post = this.Data.Posts.Find(id);
 
             Comment comment = new Comment()
             {
@@ -88,8 +90,8 @@ namespace BlogSystem.Controllers
                 Post = post
             };
 
-            this.Context.Comments.Add(comment);
-            this.Context.SaveChanges();
+            this.Data.Comments.Add(comment);
+            this.Data.Comments.SaveChanges();
 
             CommentViewModel commentViewModel = null;
 
