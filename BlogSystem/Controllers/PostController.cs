@@ -4,17 +4,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BlogSystem.Models;
+using BlogSystem.Services.Contracts;
 using BlogSystem.ViewModels;
 
 namespace BlogSystem.Controllers
 {
     public class PostController : BaseController
     {
+        private IPostService postService;
+        private IUsersService usersService;
+        private ICommentService commentService;
+
+        public PostController(IPostService postService, IUsersService usersService, ICommentService commentService)
+        {
+            this.postService = postService;
+            this.usersService = usersService;
+            this.commentService = commentService;
+        }
+        
         // GET: Post
         public ActionResult View(int id)
         {
-            //Post post = this.Context.Posts.Where(p => p.Id == id).FirstOrDefault();
-            Post post = this.Data.Posts.Find(id);
+            Post post = postService.Find(id);
 
             PostViewModel postViewModel = null;
 
@@ -54,13 +65,12 @@ namespace BlogSystem.Controllers
             {
                 Title = postShortViewModel.Title,
                 Content = postShortViewModel.Content,
-                DateCreated = DateTime.Now,
+                //DateCreated = DateTime.Now,
                 //Author = this.Context.Users.FirstOrDefault( u => u.UserName == HttpContext.User.Identity.Name)
-                Author = this.Data.Users.All().FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name)
+                Author = usersService.GetAll().FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name)
             };
 
-            this.Data.Posts.Add(post);
-            this.Data.Posts.SaveChanges();
+            this.postService.Add(post);
 
             return RedirectToAction("Index", "Home");
         }
@@ -81,17 +91,16 @@ namespace BlogSystem.Controllers
                 return null;
             }
 
-            Post post = this.Data.Posts.Find(id);
+            Post post = this.postService.Find(id);
 
             Comment comment = new Comment()
             {
                 Text = postViewModel.Text,
-                CommentTime = DateTime.Now,
+                //CommentTime = DateTime.Now,
                 Post = post
             };
 
-            this.Data.Comments.Add(comment);
-            this.Data.Comments.SaveChanges();
+            this.commentService.Add(comment);
 
             CommentViewModel commentViewModel = null;
 

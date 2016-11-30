@@ -33,6 +33,6 @@ namespace BlogSystem.Controllers
         //    this.Context = context;
         //}
 
-        public BlogSystemDbContext Context { get; set; }
+        //public BlogSystemDbContext Context { get; set; }
     }
 }

@@ -1,4 +1,12 @@
 ﻿@model PostViewModel
+@section Scripts
+{
+    <script>
+        function ResetForm() {
+            $('#new-comment-form')[0].reset();
+        }
+    </script>
+}
 
 <h2>Post View</h2>
 
@@ -21,32 +29,25 @@
 
 <div class="jumbotron">
     <h4>Post new comment:</h4>
-    
-    @*@using (Html.BeginForm("Comment", "Post", new { id = Model.Id }, FormMethod.Post))
+
+    @using (Ajax.BeginForm("Comment", "Post", new { id = Model.Id },
+                        new AjaxOptions
+                        {
+                            HttpMethod = "Post",
+                            InsertionMode = InsertionMode.InsertAfter,
+                            UpdateTargetId = "comments_holder",
+                            OnSuccess = "ResetForm"
+                        },
+                        new { id = "new-comment-form" }
+    ))
     {
 
-        <div>
-            @Html.LabelFor(p => p.Text)
-            @Html.TextBoxFor(p => p.Text, new { @class = "form-control" })
-        </div>
+    <div>
+        @Html.LabelFor(p => p.Text)
+        @Html.TextBoxFor(p => p.Text, new { @class = "form-control" })
+    </div>
 
-        <input type="submit" />
-    }*@
-    
-    @using (Ajax.BeginForm("Comment", "Post", new { id = Model.Id }, new AjaxOptions
-    {
-        HttpMethod = "Post",
-        InsertionMode = InsertionMode.InsertAfter,
-        UpdateTargetId = "comments_holder"
-    }))
-    {
-
-        <div>
-            @Html.LabelFor(p => p.Text)
-            @Html.TextBoxFor(p => p.Text, new { @class = "form-control" })
-        </div>
-
-        <input type="submit" />
+    <input type="submit" />
     }
 
-    </div>
+</div>
