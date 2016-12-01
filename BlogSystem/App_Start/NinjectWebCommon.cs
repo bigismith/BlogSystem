@@ -1,3 +1,4 @@
+using BlogSystem.Common.Caching;
 using BlogSystem.Data;
 using BlogSystem.Services;
 using BlogSystem.Services.Contracts;
@@ -83,6 +84,11 @@ namespace BlogSystem.App_Start
             kernel
                .Bind<ICommentService>()
                .To<CommentService>()
+               .InRequestScope();
+
+            kernel
+               .Bind<ICacheService>()
+               .To<HttpCacheService>()
                .InRequestScope();
         }
     }
