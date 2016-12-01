@@ -309,6 +309,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlogSystem.Common\BlogSystem.Common.csproj">
+      <Project>{e91f7d16-e175-415d-b8a7-71af0de5fe83}</Project>
+      <Name>BlogSystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlogSystem.Data\BlogSystem.Data.csproj">
       <Project>{122c9fd2-5114-4457-8e04-7ff9bececb51}</Project>
       <Name>BlogSystem.Data</Name>

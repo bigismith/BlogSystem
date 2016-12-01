@@ -9,30 +9,17 @@ namespace BlogSystem.Controllers
 {
     public abstract class BaseController : Controller
     {
-        protected IBlogSystemData Data { get; private set; }
-
-        public BaseController()
-            :this(new BlogSystemData())
-        {
-            
-        }
-
-        public BaseController(IBlogSystemData data)
-        {
-            this.Data = data;
-        }
+        //protected IBlogSystemData Data { get; private set; }
 
         //public BaseController()
-        //    : this(new BlogSystemDbContext())
+        //    :this(new BlogSystemData())
         //{
-
+            
         //}
 
-        //public BaseController(BlogSystemDbContext context)
+        //public BaseController(IBlogSystemData data)
         //{
-        //    this.Context = context;
+        //    this.Data = data;
         //}
-
-        //public BlogSystemDbContext Context { get; set; }
     }
 }
