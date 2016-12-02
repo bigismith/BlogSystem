@@ -27,6 +27,12 @@ namespace BlogSystem.App_Start
                     ;
 
                 config.CreateMap<Comment, CommentViewModel>();
+
+                config.CreateMap<Post, Areas.Admin.ViewModels.PostViewModel>()
+                    .ForMember(p => p.DateTime, map => map.MapFrom(p => p.DateCreated))
+                    .ForMember(p => p.Username, map => map.MapFrom(p => p.Author.UserName));
+
+                config.CreateMap<Areas.Admin.ViewModels.PostViewModel, Post>();
             });
         }
     }
