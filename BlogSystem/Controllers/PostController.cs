@@ -31,15 +31,17 @@ namespace BlogSystem.Controllers
 
             if (post != null)
             {
-                postViewModel = new PostViewModel()
-                {
-                    Id = post.Id,
-                    Title = post.Title,
-                    Content = post.Content,
-                    DateTime = post.DateCreated,
-                    Username = post.Author.UserName,
-                    Comments = post.Comments
-                };
+                //postViewModel = new PostViewModel()
+                //{
+                //    Id = post.Id,
+                //    Title = post.Title,
+                //    Content = post.Content,
+                //    DateTime = post.DateCreated,
+                //    Username = post.Author.UserName,
+                //    Comments = post.Comments
+                //};
+
+                postViewModel = AutoMapper.Mapper.Map<Post, PostViewModel>(post);
             }
 
             return View(postViewModel);
@@ -61,14 +63,19 @@ namespace BlogSystem.Controllers
                 return RedirectToAction("Create");
             }
 
-            Post post = new Post()
-            {
-                Title = postShortViewModel.Title,
-                Content = postShortViewModel.Content,
-                //DateCreated = DateTime.Now,
-                //Author = this.Context.Users.FirstOrDefault( u => u.UserName == HttpContext.User.Identity.Name)
-                Author = usersService.GetAll().FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name)
-            };
+            //Post post = new Post()
+            //{
+            //    Title = postShortViewModel.Title,
+            //    Content = postShortViewModel.Content,
+            //    //DateCreated = DateTime.Now,
+            //    //Author = this.Context.Users.FirstOrDefault( u => u.UserName == HttpContext.User.Identity.Name)
+            //    Author = usersService.GetAll().FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name)
+            //};
+
+            Post post = null;
+
+            post = AutoMapper.Mapper.Map<PostShortViewModel, Post>(postShortViewModel);
+            post.Author = usersService.GetAll().FirstOrDefault(u => u.UserName == HttpContext.User.Identity.Name);
 
             this.postService.Add(post);
 
@@ -121,11 +128,13 @@ namespace BlogSystem.Controllers
 
             if (comment != null)
             {
-                commentViewModel = new CommentViewModel()
-                {
-                    Id = comment.Id,
-                    Text = comment.Text
-                };
+                //commentViewModel = new CommentViewModel()
+                //{
+                //    Id = comment.Id,
+                //    Text = comment.Text
+                //};
+
+                commentViewModel = AutoMapper.Mapper.Map<Comment, CommentViewModel>(comment);
             }
 
             return PartialView("_Comment", commentViewModel);

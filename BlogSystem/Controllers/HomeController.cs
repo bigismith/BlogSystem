@@ -7,6 +7,7 @@ using BlogSystem.Common.Caching;
 using BlogSystem.Data;
 using BlogSystem.Services.Contracts;
 using BlogSystem.ViewModels;
+using AutoMapper.QueryableExtensions;
 
 namespace BlogSystem.Controllers
 {
@@ -36,21 +37,23 @@ namespace BlogSystem.Controllers
             }).ToList();
             */
 
-            var posts = this.cache.Get("homepagePosts", GetHomepagePosts, 5*60);
+            var posts = this.cache.Get("homepagePosts", GetHomepagePosts, 5 * 60);
 
             return View(posts);
         }
 
         private ICollection<PostShortViewModel> GetHomepagePosts()
         {
-            ICollection<PostShortViewModel> posts = this.postService.GetAll().OrderByDescending(p => p.DateCreated).Select(p => new PostShortViewModel()
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Content = p.Content,
-                DateTime = p.DateCreated,
-                Username = p.Author.UserName
-            }).ToList();
+            //ICollection<PostShortViewModel> posts = this.postService.GetAll().OrderByDescending(p => p.DateCreated).Select(p => new PostShortViewModel()
+            //{
+            //    Id = p.Id,
+            //    Title = p.Title,
+            //    Content = p.Content,
+            //    DateTime = p.DateCreated,
+            //    Username = p.Author.UserName
+            //}).ToList();
+
+            ICollection<PostShortViewModel> posts = this.postService.GetAll().OrderByDescending(p => p.DateCreated).ProjectTo<PostShortViewModel>().ToList();
 
             return posts;
         }
