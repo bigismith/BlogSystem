@@ -15,7 +15,7 @@ using AutoMapper.QueryableExtensions;
 
 namespace BlogSystem.Areas.Admin.Controllers
 {
-    public class PostsController : BaseController
+    public class PostsController : AdminBaseController
     {
         private IPostService postService;
 
@@ -97,7 +97,7 @@ namespace BlogSystem.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Content,DateCreated")] PostViewModel postViewModel)
+        public ActionResult Edit([Bind(Include = "Id,Title,Content,DateTime")] PostViewModel postViewModel)
         {
             Post post = AutoMapper.Mapper.Map<PostViewModel, Post>(postViewModel);
 
@@ -133,8 +133,7 @@ namespace BlogSystem.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Post post = postService.Find(id);
-            postService.Delete(post);
+            postService.Delete(id);
             return RedirectToAction("Index");
         }
     }

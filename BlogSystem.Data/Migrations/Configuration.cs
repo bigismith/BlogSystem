@@ -1,5 +1,8 @@
 namespace BlogSystem.Data.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -27,6 +30,45 @@ namespace BlogSystem.Data.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            if (!context.Roles.Any(r => r.Name == "Admin"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var roleAdmin = new IdentityRole
+                {
+                    Name = "Admin"
+                };
+
+                manager.Create(roleAdmin);
+            }
+
+
+            if (!context.Roles.Any(r => r.Name == "Blogger"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var roleBlogger = new IdentityRole
+                {
+                    Name = "Blogger"
+                };
+
+                manager.Create(roleBlogger);
+            }
+
+            if (!context.Users.Any(u => u.UserName == "bore@bore.bore"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var user = new ApplicationUser
+                {
+                    UserName = "bore@bore.bore",
+                    Email = "bore@bore.bore"
+                };
+
+                manager.Create(user, "Bore-33");
+                manager.AddToRole(user.Id, "Admin");
+            }
         }
     }
 }

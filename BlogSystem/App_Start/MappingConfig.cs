@@ -32,7 +32,9 @@ namespace BlogSystem.App_Start
                     .ForMember(p => p.DateTime, map => map.MapFrom(p => p.DateCreated))
                     .ForMember(p => p.Username, map => map.MapFrom(p => p.Author.UserName));
 
-                config.CreateMap<Areas.Admin.ViewModels.PostViewModel, Post>();
+                config.CreateMap<Areas.Admin.ViewModels.PostViewModel, Post>()
+                    .ForMember(p => p.DateCreated, map => map.MapFrom(p => p.DateTime))
+                    ;
             });
         }
     }
