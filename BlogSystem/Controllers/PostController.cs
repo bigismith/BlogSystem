@@ -83,10 +83,34 @@ namespace BlogSystem.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(PostShortViewModel postShortViewModel, int id)
+        [Authorize]
+        public ActionResult Edit(int id)
         {
+            Post post = this.postService.Find(id);
 
-            return View("Create");
+            PostEditViewModel postEditViewModel = null;
+
+            postEditViewModel = AutoMapper.Mapper.Map<Post, PostEditViewModel>(post);
+
+            return View(postEditViewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult Edit(PostEditViewModel postEditViewModel, int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Edit");
+            }
+
+            Post post = this.postService.Find(id);
+
+            post = AutoMapper.Mapper.Map<PostEditViewModel, Post>(postEditViewModel, post);
+
+            this.postService.Update(post);
+
+            return RedirectToAction("View", new { id = id });
         }
 
         [HttpPost]

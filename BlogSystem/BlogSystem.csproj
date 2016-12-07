@@ -234,6 +234,7 @@
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\PostEditViewModel.cs" />
     <Compile Include="ViewModels\PostShortViewModel.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
   </ItemGroup>
@@ -322,6 +323,7 @@
     <Content Include="Views\Post\_Comment.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Post\View - Copy.cshtml" />
+    <Content Include="Views\Post\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

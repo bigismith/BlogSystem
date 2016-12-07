@@ -18,7 +18,7 @@
                 </div>
                 <div class="about-two">
                     <a href="single.html"><img src="images/c-1.jpg" alt="" /></a>
-                    <p>Posted by <a href="#">@mainPost.Username</a> on @mainPost.DateTime.ToString("dd MMM, yyyy") <a href="#">comments(2)</a></p>
+                    <p>Posted by <a href="#">@mainPost.Username</a> on @mainPost.DateTime.ToString("dd MMM, yyyy") <a href="#">comments(@mainPost.NumComments)</a></p>
                     <p>@mainPost.Content.Substring(Math.Max(0, mainPost.Content.Length - 100))</p>
                     <div class="about-btn">
                         <a href="post/view/@mainPost.Id">Read More</a>
@@ -62,13 +62,26 @@
 
             </div>
             <div class="col-md-4 about-right heading">
+                @*<div>
+                    <div class="search-bar">
+                        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                        <input type="submit" value="">
+                    </div>
+                    <ul>
+                        <li><a href="#"><span class="fb"> </span></a></li>
+                        <li><a href="#"><span class="twit"> </span></a></li>
+                        <li><a href="#"><span class="pin"> </span></a></li>
+                        <li><a href="#"><span class="rss"> </span></a></li>
+                        <li><a href="#"><span class="drbl"> </span></a></li>
+                    </ul>
+                </div>*@
                 <div class="abt-1">
                     <h3>ABOUT US</h3>
                     <div class="abt-one">
                         <img src="images/c-2.jpg" alt="" />
                         <p>Quisque non tellus vitae mauris luctus aliquam sit amet id velit. Mauris ut dapibus nulla, a dictum neque.</p>
                         <div class="a-btn">
-                            <a href="single.html">Read More</a>
+                            <a href="/home/about">Read More</a>
                         </div>
                     </div>
                 </div>

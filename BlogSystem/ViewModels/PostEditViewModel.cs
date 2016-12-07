@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BlogSystem.ViewModels
 {
-    public class PostShortViewModel
+    public class PostEditViewModel
     {
         public int Id { get; set; }
 
@@ -15,11 +15,5 @@ namespace BlogSystem.ViewModels
 
         [Required]
         public string Content { get; set; }
-
-        public string Username { get; set; }
-
-        public DateTime DateTime { get; set; }
-
-        public int NumComments { get; set; }
     }
 }
