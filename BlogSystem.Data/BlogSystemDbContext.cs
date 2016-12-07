@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BlogSystem.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Diagnostics;
 
 namespace BlogSystem.Data
 {
@@ -13,7 +14,7 @@ namespace BlogSystem.Data
     {
         public BlogSystemDbContext() : base("BlogSystemConnection")
         {
-                
+            Database.Log = sql => Debug.Write(sql);
         }
 
         public static BlogSystemDbContext Create()

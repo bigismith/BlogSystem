@@ -1,3 +1,20 @@
 ﻿@model CommentViewModel
-    
-<div>@Model.Text<span> <a href="/post/commentedit/@Model.Id">edit</a></span></div>
+
+@*<div>@Model.Text<span> <a href="/post/commentedit/@Model.Id">edit</a></span></div>*@
+
+<div class="media">
+    <div class="media-left">
+        <a href="#">
+            <img src="/images/si.png" alt="">
+        </a>
+    </div>
+    <div class="media-body">
+        @*<h4 class="media-heading">	Richard Spark</h4>*@
+        <p>@Model.Text</p>
+    </div>
+    @*<div class="media-right">
+            <a href="#">
+                <img src="images/si.png" alt="">
+            </a>
+        </div>*@
+</div>

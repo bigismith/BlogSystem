@@ -53,7 +53,7 @@ namespace BlogSystem.Controllers
             //    Username = p.Author.UserName
             //}).ToList();
 
-            ICollection<PostShortViewModel> posts = this.postService.GetAll().OrderByDescending(p => p.DateCreated).ProjectTo<PostShortViewModel>().ToList();
+            ICollection<PostShortViewModel> posts = this.postService.GetAll().Take(7).OrderByDescending(p => p.DateCreated).ProjectTo<PostShortViewModel>().ToList();
 
             return posts;
         }

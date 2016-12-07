@@ -8,46 +8,54 @@
     </script>
 }
 
-<h2>Post View</h2>
+<!--start-single-->
+<div class="single">
+    <div class="container">
+        <div class="single-top">
+            <a href="#"><img class="img-responsive" src="images/single-1.jpg" alt=" "></a>
+            <div class=" single-grid">
+                <h4>@Model.Title</h4>
+                <ul class="blog-ic">
+                    <li><a href="#"><span> <i class="glyphicon glyphicon-user"> </i>@Model.Username</span> </a> </li>
+                    <li><span><i class="glyphicon glyphicon-time"> </i>@Model.DateTime.ToString("dd MMM, yyyy")</span></li>
+                    @*<li><span><i class="glyphicon glyphicon-eye-open"> </i>Hits:145</span></li>*@
+                </ul>
+                <p>@Model.Content</p>
+            </div>
+            <div class="comments heading" id="comments_holder">
+                <h3>Comments</h3>
+                @foreach (var comment in Model.Comments)
+                {
+                    @Html.Action("Comment", "Post", comment)
+                }
 
-<div class="jumbotron">
-    <h2 class="text-center">@Model.Title</h2>
-    <p>
-        @Model.Content
-    </p>
-    <div>Created at: @Model.DateTime</div>
-    <div>by @Model.Username</div>
-</div>
+            </div>
+            <div class="comment-bottom heading">
+                <h3>Leave a Comment</h3>
 
-<div class="jumbotron" id="comments_holder">
-    <h3>Comments:</h3>
-    @foreach (var comment in Model.Comments)
-    {
-        @Html.Action("Comment", "Post", comment)
-    }
-</div>
+                @using (Ajax.BeginForm("Comment", "Post", new { id = Model.Id },
+                                    new AjaxOptions
+                                    {
+                                        HttpMethod = "Post",
+                                        InsertionMode = InsertionMode.InsertAfter,
+                                        UpdateTargetId = "comments_holder",
+                                        OnSuccess = "ResetForm"
+                                    },
+                                    new { id = "new-comment-form" }
+                ))
+                {
 
-<div class="jumbotron">
-    <h4>Post new comment:</h4>
+                    <div>
+                        @Html.LabelFor(p => p.Text)
+                        @Html.TextAreaFor(p => p.Text, new { @class = "form-control" })
+                    </div>
 
-    @using (Ajax.BeginForm("Comment", "Post", new { id = Model.Id },
-                        new AjaxOptions
-                        {
-                            HttpMethod = "Post",
-                            InsertionMode = InsertionMode.InsertAfter,
-                            UpdateTargetId = "comments_holder",
-                            OnSuccess = "ResetForm"
-                        },
-                        new { id = "new-comment-form" }
-    ))
-    {
+                    <input type="submit" />
+                }
 
-    <div>
-        @Html.LabelFor(p => p.Text)
-        @Html.TextBoxFor(p => p.Text, new { @class = "form-control" })
+            </div>
+        </div>
     </div>
-
-    <input type="submit" />
-    }
-
 </div>
+<!--end-single-->
+
