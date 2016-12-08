@@ -12,7 +12,8 @@
                     {
                         <div class="col-md-6 abt-left">
                             <a href="/post/view/@post.Id"><img src="images/c-3.jpg" alt="" /></a>
-                            <h3><a href="/post/view/@post.Id">@post.Title</a></h3>
+                            <h3><a href="/post/view/@post.Id">@post.Title</a> </h3>
+                            <a href="/profile/posts/edit/@post.Id"> edit </a>
                             <p><a href="/post/view/@post.Id#comments_holder">comments(@post.NumComments)</a></p>
                             <p>@post.Content.Substring(Math.Max(0, post.Content.Length - 40))</p>
                             <label>@post.DateTime.ToString("dd MMM, yyyy")</label>

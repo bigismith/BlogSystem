@@ -73,6 +73,11 @@ namespace BlogSystem.Areas.Profile.Controllers
         {
             Post post = this.postService.Find(id);
 
+            if (post.Author.Id != this.User.Identity.GetUserId())
+            {
+                return RedirectToAction("Index", "Home", new { area = "" } );
+            }
+
             PostEditViewModel postEditViewModel = null;
 
             postEditViewModel = AutoMapper.Mapper.Map<Post, PostEditViewModel>(post);
@@ -89,6 +94,11 @@ namespace BlogSystem.Areas.Profile.Controllers
             }
 
             Post post = this.postService.Find(id);
+
+            if (post.Author.Id != this.User.Identity.GetUserId())
+            {
+                return RedirectToAction("Index", "Home", new { area = "" });
+            }
 
             post = AutoMapper.Mapper.Map<PostEditViewModel, Post>(postEditViewModel, post);
 
