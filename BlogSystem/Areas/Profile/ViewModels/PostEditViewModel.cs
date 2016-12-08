@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BlogSystem.ViewModels
+namespace BlogSystem.Areas.Profile.ViewModels
 {
     public class PostEditViewModel
     {

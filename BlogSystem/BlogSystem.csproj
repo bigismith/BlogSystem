@@ -221,6 +221,10 @@
     <Compile Include="Areas\Admin\Controllers\AdminBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\ViewModels\PostViewModel.cs" />
+    <Compile Include="Areas\Profile\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Profile\Controllers\ProfileBaseController.cs" />
+    <Compile Include="Areas\Profile\ProfileAreaRegistration.cs" />
+    <Compile Include="Areas\Profile\ViewModels\PostCreateViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -234,7 +238,7 @@
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\PostEditViewModel.cs" />
+    <Compile Include="Areas\Profile\ViewModels\PostEditViewModel.cs" />
     <Compile Include="ViewModels\PostShortViewModel.cs" />
     <Compile Include="ViewModels\PostViewModel.cs" />
   </ItemGroup>
@@ -266,6 +270,9 @@
     <Content Include="Areas\Admin\Views\Posts\Index.cshtml" />
     <Content Include="fonts\Raleway-Regular.ttf" />
     <Content Include="fonts\RobotoSlab-Regular.ttf" />
+    <Content Include="Areas\Profile\Views\web.config" />
+    <Content Include="Areas\Profile\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Profile\Views\_ViewStart.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\easing.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -318,16 +325,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Post\Create.cshtml" />
+    <Content Include="Areas\Profile\Views\Posts\Create.cshtml" />
     <Content Include="Views\Post\View.cshtml" />
     <Content Include="Views\Post\_Comment.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Post\View - Copy.cshtml" />
-    <Content Include="Views\Post\Edit.cshtml" />
+    <Content Include="Areas\Profile\Views\Posts\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\AdminBase\" />
+    <Folder Include="Areas\Profile\Models\" />
+    <Folder Include="Areas\Profile\Views\ProileBase\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

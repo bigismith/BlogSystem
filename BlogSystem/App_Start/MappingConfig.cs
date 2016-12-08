@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using BlogSystem.Models;
 using BlogSystem.ViewModels;
+using BlogSystem.Areas.Profile.ViewModels;
 
 namespace BlogSystem.App_Start
 {
