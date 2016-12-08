@@ -10,5 +10,7 @@ namespace BlogSystem.Services.Contracts
     public interface IPostService : IService<Post>
     {
         IQueryable<Post> GetAll();
+
+        IQueryable<Post> GetByUserId(object id);
     }
 }

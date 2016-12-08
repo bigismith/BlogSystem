@@ -36,11 +36,14 @@
                         @Html.Partial("_LoginPartial")
                         @if (this.User.Identity.IsAuthenticated)
                         {
-                            <a href="/profile/posts/create">Create post</a>
+                            <a href="/profile/posts/create"> Create post </a>
+                            @:|
+                            <a href="/profile/posts"> My posts </a>
                         }
                         @if (this.User.IsInRole("Admin"))
                         {
-                            <a href="/admin/posts">Admin panel</a>
+                            @:|
+                            <a href="/admin/posts"> Admin panel </a>
                         }
                     </div>
                 </div>
@@ -64,4 +67,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

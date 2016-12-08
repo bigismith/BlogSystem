@@ -27,5 +27,10 @@ namespace BlogSystem.Services
             base.Add(entity);
             base.SaveChanges();
         }
+
+        public IQueryable<Post> GetByUserId(object id)
+        {
+            return base.GetAll().OrderByDescending(p => p.DateCreated).Where(p => p.Author.Id == id);
+        }
     }
 }

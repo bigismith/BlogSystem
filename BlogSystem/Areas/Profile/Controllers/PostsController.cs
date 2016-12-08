@@ -3,6 +3,8 @@ using BlogSystem.Areas.Profile.ViewModels;
 using BlogSystem.Models;
 using BlogSystem.Services.Contracts;
 using BlogSystem.ViewModels;
+using Microsoft.AspNet.Identity;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +25,14 @@ namespace BlogSystem.Areas.Profile.Controllers
         }
 
         // GET: Profile/Posts
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            ICollection<PostViewModel> posts = this.postService.GetAll().ProjectTo<PostViewModel>().ToList();
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
 
-            return View(posts);
+            IQueryable<PostShortViewModel> posts = this.postService.GetByUserId(HttpContext.User.Identity.GetUserId()).ProjectTo<PostShortViewModel>();//.ToList();
+
+            return View(posts.ToPagedList(pageNumber, pageSize));
         }
 
         [HttpGet]

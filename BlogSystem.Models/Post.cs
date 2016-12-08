@@ -21,6 +21,8 @@ namespace BlogSystem.Models
 
         public DateTime DateCreated { get; set; }
 
+        //public virtual int AuthorId { get; set; }
+
         public virtual ApplicationUser Author { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
