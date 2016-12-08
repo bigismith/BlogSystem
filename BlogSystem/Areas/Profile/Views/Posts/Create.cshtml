@@ -1,18 +1,25 @@
 ﻿@model PostCreateViewModel
 
-<h2>Create New Post</h2>
+<div class="single">
+    <div class="container">
+        <div class="single-top">
 
-@using (Html.BeginForm("Create", "Post", FormMethod.Post))
-{
-    <div>
-        @Html.LabelFor(p => p.Title)
-        @Html.TextBoxFor(p => p.Title, new {@class = "form-control"})
-    </div>
-    <div>
-        @Html.LabelFor(p => p.Content)
-        @Html.TextBoxFor(p => p.Content, new {@class = "form-control"})
-    </div>
+            <h2>Create New Post</h2>
 
-    <input type="submit" />
-}
+            @using (Html.BeginForm("Create", "Post", FormMethod.Post))
+            {
+                <div>
+                    @Html.LabelFor(p => p.Title)
+                    @Html.TextBoxFor(p => p.Title, new { @class = "form-control" })
+                </div>
+                <div>
+                    @Html.LabelFor(p => p.Content)
+                    @Html.TextBoxFor(p => p.Content, new { @class = "form-control" })
+                </div>
 
+                <input type="submit" />
+            }
+
+            </div>
+</div>
+</div>
