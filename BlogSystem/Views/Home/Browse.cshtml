@@ -1,11 +1,4 @@
-﻿@model ICollection<PostShortViewModel>
-
-@{ var mainPost = Model.FirstOrDefault();
-    //Model.Remove(mainPost);
-    List<PostShortViewModel> list2 = new List<PostShortViewModel>() { mainPost };
-    //ICollection<PostShortViewModel> posts = Model.Except(list2).ToList();
-    ICollection<PostShortViewModel> posts = Model.Skip(1).ToList();
-}
+﻿@model PagedList.IPagedList<PostShortViewModel>
 
 <!--about-starts-->
 <div class="about">
@@ -13,36 +6,11 @@
         <div class="about-main">
             <div class="col-md-8 about-left">
 
-                <div class="about-one">
-                    <a href="post/view/@mainPost.Id"><h3>@mainPost.Title</h3></a>
-                </div>
-                <div class="about-two">
-                    <a href="single.html"><img src="images/c-1.jpg" alt="" /></a>
-                    <p>Posted by <a href="#">@mainPost.Username</a> on @mainPost.DateTime.ToString("dd MMM, yyyy") <a href="/post/view/@mainPost.Id#comments_holder">comments(@mainPost.NumComments)</a></p>
-                    <p>@mainPost.Content.Substring(Math.Max(0, mainPost.Content.Length - 100))</p>
-                    <div class="about-btn">
-                        <a href="post/view/@mainPost.Id">Read More</a>
-                    </div>
-                    <ul>
-                        <li><p>Share : </p></li>
-                        <li><a href="#"><span class="fb"> </span></a></li>
-                        <li><a href="#"><span class="twit"> </span></a></li>
-                        <li><a href="#"><span class="pin"> </span></a></li>
-                        <li><a href="#"><span class="rss"> </span></a></li>
-                        <li><a href="#"><span class="drbl"> </span></a></li>
-                    </ul>
-                </div>
+
                 <div class="about-tre">
 
-                    @{ int i = 0; }
-                    @foreach (var post in posts)
+                    @foreach (var post in Model)
                     {
-                        i++;
-                        if (i % 2 != 0)
-                        {
-                            @:<div class="a-1">
-    }
-
                         <div class="col-md-6 abt-left">
                             <a href="post/view/@post.Id"><img src="images/c-3.jpg" alt="" /></a>
                             <h3><a href="post/view/@post.Id">@post.Title</a></h3>
@@ -50,47 +18,19 @@
                             <p>@post.Content.Substring(Math.Max(0, post.Content.Length - 40))</p>
                             <label>@post.DateTime.ToString("dd MMM, yyyy")</label>
                         </div>
-
-                        if (i % 2 == 0)
-                        {
-                            @:</div>
-                            <div class="clearfix"></div>
-                        }
                     }
 
-
-                    <br/>
-                    <div class="about-btn" align="center">
-                        <a href="/home/browse">Browse More Posts</a>
-                    </div>
-
                 </div>
+
+                <div class="clearfix"></div>
+                <br />
+
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Browse", new { page }))
 
             </div>
             <div class="col-md-4 about-right heading">
-                @*<div>
-                    <div class="search-bar">
-                        <input type="text" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-                        <input type="submit" value="">
-                    </div>
-                    <ul>
-                        <li><a href="#"><span class="fb"> </span></a></li>
-                        <li><a href="#"><span class="twit"> </span></a></li>
-                        <li><a href="#"><span class="pin"> </span></a></li>
-                        <li><a href="#"><span class="rss"> </span></a></li>
-                        <li><a href="#"><span class="drbl"> </span></a></li>
-                    </ul>
-                </div>*@
-                <div class="abt-1">
-                    <h3>ABOUT US</h3>
-                    <div class="abt-one">
-                        <img src="images/c-2.jpg" alt="" />
-                        <p>Quisque non tellus vitae mauris luctus aliquam sit amet id velit. Mauris ut dapibus nulla, a dictum neque.</p>
-                        <div class="a-btn">
-                            <a href="/home/about">Read More</a>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="abt-2">
                     <h3>YOU MIGHT ALSO LIKE</h3>
                     <div class="might-grid">
@@ -135,15 +75,6 @@
                         <li><a href="single.html">Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing </a> </li>
                         <li><a href="single.html">Software like Aldus PageMaker including versionsof Lorem Ipsum.</a> </li>
                     </ul>
-                </div>
-                <div class="abt-2">
-                    <h3>NEWS LETTER</h3>
-                    <div class="news">
-                        <form>
-                            <input type="text" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" />
-                            <input type="submit" value="Subscribe">
-                        </form>
-                    </div>
                 </div>
             </div>
             <div class="clearfix"></div>

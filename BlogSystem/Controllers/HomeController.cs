@@ -8,6 +8,7 @@ using BlogSystem.Data;
 using BlogSystem.Services.Contracts;
 using BlogSystem.ViewModels;
 using AutoMapper.QueryableExtensions;
+using PagedList;
 
 namespace BlogSystem.Controllers
 {
@@ -54,6 +55,24 @@ namespace BlogSystem.Controllers
             //}).ToList();
 
             ICollection<PostShortViewModel> posts = this.postService.GetAll().Take(7).ProjectTo<PostShortViewModel>().ToList();
+
+            return posts;
+        }
+
+        public ActionResult Browse(int? page)
+        {
+            int pageSize = 6;
+            int pageNumber = (page ?? 1);
+
+            var posts = this.cache.Get("browsePostsP" + pageNumber, () => GetAllByPage(pageNumber, pageSize), 0 * 60);
+
+            return View(posts.ToPagedList(pageNumber, pageSize));
+        }
+
+        private IQueryable<PostShortViewModel> GetAllByPage(int page, int pageSize)
+        {
+            IQueryable<PostShortViewModel> posts = this.postService.GetAll()//.Skip((page-1)* pageSize).Take(pageSize)
+                .ProjectTo<PostShortViewModel>();
 
             return posts;
         }
